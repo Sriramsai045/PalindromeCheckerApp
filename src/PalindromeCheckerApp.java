@@ -1,15 +1,42 @@
-import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import  java.util.Scanner;
+import java.util.Stack;
 public class PalindromeCheckerApp {
     public static void main(String[] args){
-        String name="madam";
-        String reverse="";
-        for(int i=name.length()-1;i>=0;i--){
-            reverse=reverse+name.charAt(i);
-        }
-        boolean ispalindrome=name.equals(reverse);
-        System.out.println("Input text : "+name);
-        System.out.println("Reversed text : "+reverse);
-        System.out.print("Is it a Palindrome? : "+ ispalindrome);
 
+        String input = "level";
+
+        PalindromeStrategy strategy = new StackStrategy();
+
+        boolean result = strategy.check(input);
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+}
+
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
