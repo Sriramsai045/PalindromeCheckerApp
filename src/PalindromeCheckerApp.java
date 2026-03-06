@@ -1,15 +1,54 @@
-import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import  java.util.Scanner;
 public class PalindromeCheckerApp {
-    public static void main(String[] args){
-        String name="madam";
-        String reverse="";
-        for(int i=name.length()-1;i>=0;i--){
-            reverse=reverse+name.charAt(i);
-        }
-        boolean ispalindrome=name.equals(reverse);
-        System.out.println("Input text : "+name);
-        System.out.println("Reversed text : "+reverse);
-        System.out.print("Is it a Palindrome? : "+ ispalindrome);
+    // Method to normalize string
+    public static String normalize(String str) {
 
+        // Convert to lowercase
+        str = str.toLowerCase();
+
+        // Remove spaces using regular expression
+        str = str.replaceAll("\\s+", "");
+
+        return str;
+    }
+
+    // Method to check palindrome (iterative approach)
+    public static boolean isPalindrome(String str) {
+
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Case-Insensitive & Space-Ignored Palindrome Checker ===");
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        // Step 1: Normalize string
+        String processed = normalize(input);
+
+        // Step 2: Apply palindrome logic
+        if (isPalindrome(processed)) {
+            System.out.println("Result: The string is a Palindrome.");
+        } else {
+            System.out.println("Result: The string is NOT a Palindrome.");
+        }
+
+        scanner.close();
     }
 }
