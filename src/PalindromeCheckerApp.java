@@ -1,15 +1,30 @@
-import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.LinkedList;
 public class PalindromeCheckerApp {
     public static void main(String[] args){
-        String name="madam";
-        String reverse="";
-        for(int i=name.length()-1;i>=0;i--){
-            reverse=reverse+name.charAt(i);
-        }
-        boolean ispalindrome=name.equals(reverse);
-        System.out.println("Input text : "+name);
-        System.out.println("Reversed text : "+reverse);
-        System.out.print("Is it a Palindrome? : "+ ispalindrome);
+        // Define the input string
+        String input = "level";
 
+        LinkedList<Character> list = new LinkedList<>();
+
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
+
+        boolean isPalindrome = true;
+        while (list.size() > 1) {
+
+            char first = list.removeFirst();
+            char last = list.removeLast();
+
+            if (first != last) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
