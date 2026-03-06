@@ -1,15 +1,27 @@
-import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
     public static void main(String[] args){
-        String name="madam";
-        String reverse="";
-        for(int i=name.length()-1;i>=0;i--){
-            reverse=reverse+name.charAt(i);
+        String input = "civic";
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
         }
-        boolean ispalindrome=name.equals(reverse);
-        System.out.println("Input text : "+name);
-        System.out.println("Reversed text : "+reverse);
-        System.out.print("Is it a Palindrome? : "+ ispalindrome);
+        boolean isPalindrome = true;
+        while (!queue.isEmpty()) {
+            char fromQueue = queue.remove();
+            char fromStack = stack.pop();
 
+            if (fromQueue != fromStack) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
